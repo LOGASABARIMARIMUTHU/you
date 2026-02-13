@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Valentine 💙</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    overflow:hidden;
+    background:#001f3f;
+    color:white;
+}
+
+/* Slides */
+.slide{
+    width:100%;
+    height:100vh;
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+.active{
+    display:flex;
+}
+
+/* Slide 1 background image */
+#slide1{
+    background:url(bg2.jpeg) center/cover no-repeat;
+}
+
+/* Blue overlay */
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0, 0, 50, 0.6);
+    top:0;
+    left:0;
+}
+
+/* Buttons */
+button{
+    padding:12px 25px;
+    margin:15px;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.yes{
+    background:#00bfff;
+    color:white;
+}
+
+.no{
+    background:#ff4d6d;
+    color:white;
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    font-size:20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+}
+
+/* Card image second slide */
+.card-img{
+    width:220px;
+    height:300px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,191,255,0.7);
+    margin-bottom:20px;
+    animation:fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* Video styling */
+.video-container{
+    width:400px;
+    max-width:80%;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 0 25px #00bfff;
+}
+
+video{
+    width:100%;
+}
+
+.poem{
+    max-width:600px;
+    padding:20px;
+    line-height:1.8;
+    font-size:18px;
+}
+
+/* MOBILE */
+@media (max-width: 767px) {
+  body { font-size: 14px; }
+  .container { padding: 10px; }
+}
+
+/* TABLET */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body { font-size: 16px; }
+  .container { padding: 20px; }
+}
+
+/* DESKTOP */
+@media (min-width: 1025px) {
+  body { font-size: 18px; }
+  .container { padding: 40px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Background audio -->
+<audio autoplay loop>
+    <source src="background.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SLIDE 1 -->
+<div id="slide1" class="slide active">
+    <div class="overlay"></div>
+    <h1 style="z-index:1;">Say yes… and let’s make memories that last forever  💙</h1>
+    <div style="z-index:1;">
+        <button class="yes" onclick="nextSlide(2)">Yes 💙</button>
+        <button class="no" onclick="funnyNo(this)">No 🤨</button>
+    </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div id="slide2" class="slide">
+    <img src="cute.jpeg" class="card-img">
+    <div class="poem">
+        Every time I look at you, I see my peace, my happiness, and my forever.<br>
+        Even on my worst days, your love gives me strength to smile again.<br>
+        I don’t need anything else in this world, as long as I have you by my side.<br>
+        You are not just someone I love. You are my everything.💙🦢
+    </div>
+    <button class="yes" onclick="nextSlide(3)">Next 💙</button>
+</div>
+
+<!-- SLIDE 3 (Simple Romantic Message) -->
+<div id="slide3" class="slide">
+    <h2>My heart is always yours 💙</h2>
+    <div class="poem">
+        Hand in hand, heart to heart, we’ve come so far together.<br>
+        Every moment with you feels like a dream I never want to wake from.<br>
+        Here’s to more laughter, more love, and unforgettable memories.
+    </div>
+    <button class="yes" onclick="nextSlide(4)">Next 💙</button>
+</div>
+
+<!-- SLIDE 4 (Video) -->
+<div id="slide4" class="slide">
+    <h2>For You 💙</h2>
+    <div class="video-container">
+        <video controls>
+            <source src="love.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<script>
+/* Slide navigation */
+function nextSlide(num){
+    document.querySelectorAll('.slide').forEach(slide=>{
+        slide.classList.remove('active');
+    });
+    document.getElementById('slide'+num).classList.add('active');
+}
+
+/* Funny NO button */
+function funnyNo(btn){
+    btn.innerText = "unaku vera option illa only yess😘";
+    btn.style.position = "absolute";
+    btn.style.left = Math.random()*80 + "%";
+    btn.style.top = Math.random()*80 + "%";
+}
+
+/* Floating hearts on all slides */
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💙💙";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = Math.random()*20 + 15 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },6000);
+}
+setInterval(createHeart, 300);
+</script>
+</body>
+</html>
